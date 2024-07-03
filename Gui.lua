@@ -1,6 +1,3 @@
--- Gui to Lua
--- Version: 3.2
-
 -- Instances:
 
 local Tutorial = Instance.new("ScreenGui")
@@ -20,8 +17,16 @@ local InjectCorner = Instance.new("UICorner")
 local StatusDot = Instance.new("Frame")
 local StatusCorner = Instance.new("UICorner")
 local Layout = Instance.new("UIListLayout")
+local LibraryButton = Instance.new("TextButton")
+local LibraryCorner = Instance.new("UICorner")
+
+local LibraryUI = Instance.new("Frame")
+local BackButton = Instance.new("TextButton")
+local BackCorner = Instance.new("UICorner")
 local InfYieldButton = Instance.new("TextButton")
 local InfYieldCorner = Instance.new("UICorner")
+local DexExplorerButton = Instance.new("TextButton")
+local DexExplorerCorner = Instance.new("UICorner")
 
 -- Properties:
 
@@ -148,12 +153,52 @@ StatusDot.Size = UDim2.new(0, 20, 0, 20) -- Small dot
 StatusCorner.Parent = StatusDot
 StatusCorner.CornerRadius = UDim.new(0.5, 0) -- Makes the dot round
 
+LibraryButton.Name = "LibraryButton"
+LibraryButton.Parent = Frame
+LibraryButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+LibraryButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+LibraryButton.BorderSizePixel = 0
+LibraryButton.Position = UDim2.new(0.35, 0, 0.0953545198, 0)
+LibraryButton.Size = UDim2.new(0, 86, 0, 26)
+LibraryButton.Font = Enum.Font.SourceSans
+LibraryButton.Text = "Library"
+LibraryButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+LibraryButton.TextSize = 14.000
+
+LibraryCorner.Parent = LibraryButton
+
+Layout.Parent = Main
+Layout.SortOrder = Enum.SortOrder.LayoutOrder
+
+LibraryUI.Name = "LibraryUI"
+LibraryUI.Parent = Tutorial
+LibraryUI.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+LibraryUI.BorderColor3 = Color3.fromRGB(0, 0, 0)
+LibraryUI.BorderSizePixel = 0
+LibraryUI.Position = UDim2.new(0.0538807958, 0, 0.0433307551, 0)
+LibraryUI.Size = UDim2.new(0, 713, 0, 409)
+LibraryUI.Visible = false
+
+BackButton.Name = "BackButton"
+BackButton.Parent = LibraryUI
+BackButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+BackButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+BackButton.BorderSizePixel = 0
+BackButton.Position = UDim2.new(0.05, 0, 0.0953545198, 0)
+BackButton.Size = UDim2.new(0, 86, 0, 26)
+BackButton.Font = Enum.Font.SourceSans
+BackButton.Text = "Back"
+BackButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+BackButton.TextSize = 14.000
+
+BackCorner.Parent = BackButton
+
 InfYieldButton.Name = "InfYieldButton"
-InfYieldButton.Parent = Frame
+InfYieldButton.Parent = LibraryUI
 InfYieldButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 InfYieldButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 InfYieldButton.BorderSizePixel = 0
-InfYieldButton.Position = UDim2.new(0.475, 0, 0.0953545198, 0)
+InfYieldButton.Position = UDim2.new(0.35, 0, 0.0953545198, 0)
 InfYieldButton.Size = UDim2.new(0, 86, 0, 26)
 InfYieldButton.Font = Enum.Font.SourceSans
 InfYieldButton.Text = "Inf Yield"
@@ -162,8 +207,19 @@ InfYieldButton.TextSize = 14.000
 
 InfYieldCorner.Parent = InfYieldButton
 
-Layout.Parent = Main
-Layout.SortOrder = Enum.SortOrder.LayoutOrder
+DexExplorerButton.Name = "DexExplorerButton"
+DexExplorerButton.Parent = LibraryUI
+DexExplorerButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+DexExplorerButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+DexExplorerButton.BorderSizePixel = 0
+DexExplorerButton.Position = UDim2.new(0.65, 0, 0.0953545198, 0)
+DexExplorerButton.Size = UDim2.new(0, 86, 0, 26)
+DexExplorerButton.Font = Enum.Font.SourceSans
+DexExplorerButton.Text = "Dex Explorer"
+DexExplorerButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+DexExplorerButton.TextSize = 14.000
+
+DexExplorerCorner.Parent = DexExplorerButton
 
 -- Scripts:
 
@@ -205,58 +261,52 @@ end
 
 local injected = false
 
-local function clearScript()
-    local script = Instance.new('LocalScript', ClearButton)
-    script.Parent.MouseButton1Click:Connect(function()
-        script.Parent.Parent.Source.Text = "" -- Clear the Source TextBox
-    end)
-end
-coroutine.wrap(clearScript)()
+ClearButton.MouseButton1Click:Connect(function()
+    Source.Text = "" -- Clear the Source TextBox
+end)
 
-local function executeScript()
-    local script = Instance.new('LocalScript', ExecuteButton)
-    script.Parent.MouseButton1Click:Connect(function()
-        if injected then
-            local code = script.Parent.Parent.Source.Text
-            local success, errorMessage = pcall(function()
-                loadstring(code)()
-            end)
-            if not success then
-                warn("Error executing script: " .. errorMessage)
-            end
-        else
-            warn("Script cannot be executed. Please inject first.")
-        end
-    end)
-end
-coroutine.wrap(executeScript)()
-
-local function injectScript()
-    local script = Instance.new('LocalScript', InjectButton)
-    script.Parent.MouseButton1Click:Connect(function()
-        script.Parent.Text = "Injecting..."
-        script.Parent.Parent.StatusDot.BackgroundColor3 = Color3.fromRGB(255, 165, 0) -- Orange while injecting
-        wait(2) -- Simulate the delay of injection
-        injected = true
-        script.Parent.Text = "Inject"
-        script.Parent.Parent.ExecuteButton.Active = true -- Enable the Execute button
-        script.Parent.Parent.ExecuteButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- Change text color to indicate activation
-        script.Parent.Parent.StatusDot.BackgroundColor3 = Color3.fromRGB(0, 255, 0) -- Green once injected
-    end)
-end
-coroutine.wrap(injectScript)()
-
-local function infYieldScript()
-    local script = Instance.new('LocalScript', InfYieldButton)
-    script.Parent.MouseButton1Click:Connect(function()
+ExecuteButton.MouseButton1Click:Connect(function()
+    if injected then
+        local code = Source.Text
         local success, errorMessage = pcall(function()
-            loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+            loadstring(code)()
         end)
         if not success then
-            warn("Error executing Infinite Yield script: " .. errorMessage)
+            warn("Error executing script: " .. errorMessage)
         end
-    end)
-end
-coroutine.wrap(infYieldScript)()
+    else
+        warn("Script cannot be executed. Please inject first.")
+    end
+end)
+
+InjectButton.MouseButton1Click:Connect(function()
+    InjectButton.Text = "Injecting..."
+    StatusDot.BackgroundColor3 = Color3.fromRGB(255, 165, 0) -- Orange while injecting
+    wait(2) -- Simulate the delay of injection
+    injected = true
+    InjectButton.Text = "Inject"
+    ExecuteButton.Active = true -- Enable the Execute button
+    ExecuteButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- Change text color to indicate activation
+    StatusDot.BackgroundColor3 = Color3.fromRGB(0, 255, 0) -- Green once injected
+end)
+
+LibraryButton.MouseButton1Click:Connect(function()
+    Main.Visible = false
+    LibraryUI.Visible = true
+end)
+
+BackButton.MouseButton1Click:Connect(function()
+    LibraryUI.Visible = false
+    Main.Visible = true
+end)
+
+InfYieldButton.MouseButton1Click:Connect(function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+DexExplorerButton.MouseButton1Click:Connect(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/peyton2465/Dex/master/out.lua"))()
+end)
 
 makeFrameDraggable(Main)
+makeFrameDraggable(LibraryUI)
