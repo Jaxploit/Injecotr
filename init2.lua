@@ -7,11 +7,11 @@ getgenv().getexecutorname = function()
 end
 
 getgenv().identity = function()
-    print("7")
+    print("Current identity is 7")
 end
 
 getgenv().printidentity = function()
-    print("7")
+    print("Current identity is 7")
 end
 
 local starterGui = game:GetService("StarterGui")
