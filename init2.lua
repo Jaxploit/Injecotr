@@ -18,7 +18,7 @@ local starterGui = game:GetService("StarterGui")
 
 local notificationConfig = {
     Title = "Made-by-Spectra",
-    Text = "\n Successfully injected!",
+    Text = " Successfully injected",
     Icon = "Bild-URL hier",
     Duration = 5
 }
@@ -1681,12 +1681,6 @@ end
 syn.protect_gui(DrawingDict)
 syn.protect_gui(ClipboardUI)
 QueueGetIdentity()
-
-function readfile(path)
-    local content = httpget("http://localhost:5000/readfile?path=" .. path:gsub("/", "\\"))
-    print(content)
-    return content
-end
 
 function makefolder(name)
     local response = httpget("http://localhost:5000/makefolder?name=" .. name:gsub("/", "\\"))
