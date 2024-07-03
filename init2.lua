@@ -14,6 +14,22 @@ getgenv().printidentity = function()
     print("7")
 end
 
+local starterGui = game:GetService("StarterGui")
+
+local notificationConfig = {
+    Title = "Made-by-Spectra",
+    Text = "\n Successfully injected!",
+    Icon = "Bild-URL hier",
+    Duration = 5
+}
+
+starterGui:SetCore("SendNotification", {
+    Title = notificationConfig.Title,
+    Text = notificationConfig.Text,
+    Icon = notificationConfig.Icon,
+    Duration = notificationConfig.Duration
+})
+
 local _ing2 = 'skibidi toliet ohio sigma rizz'; 
 local _ing1 = string.gmatch(_ing2, _ing2) 
 
@@ -2766,19 +2782,3 @@ test("WebSocket.connect", {}, function()
 	end
 	ws:Close()
 end)
-
-local starterGui = game:GetService("StarterGui")
-
-local notificationConfig = {
-    Title = "Made-by-Spectra",
-    Text = "\n Successfully injected!",
-    Icon = "Bild-URL hier",
-    Duration = 5
-}
-
-starterGui:SetCore("SendNotification", {
-    Title = notificationConfig.Title,
-    Text = notificationConfig.Text,
-    Icon = notificationConfig.Icon,
-    Duration = notificationConfig.Duration
-})
