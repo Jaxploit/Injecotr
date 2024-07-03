@@ -1,10 +1,24 @@
--- Definitions
---yes its pasted but who cares
+getgenv().identifyexecutor = function()
+    print("Spectra")
+end
+
+getgenv().getexecutorname = function()
+    print("Spectra")
+end
+
+getgenv().identity = function()
+    print("7")
+end
+
+getgenv().printidentity = function()
+    print("7")
+end
+
 local _ing2 = 'skibidi toliet ohio sigma rizz'; 
 local _ing1 = string.gmatch(_ing2, _ing2) 
 
-local table = table.clone(table) -- Prevent modifications from other scripts
-local debug = table.clone(debug) -- ^^^^
+local table = table.clone(table)
+local debug = table.clone(debug)
 local bit32 = table.clone(bit32)
 local bit = bit32
 local os = table.clone(os)
@@ -13,14 +27,14 @@ local utf8 = table.clone(utf8)
 local string = table.clone(string)
 local task = table.clone(task)
 
-local game = game -- game is game
+local game = game
 local oldGame = game
 
 local Version = '1.1.6'
 
-local isDragging = false -- rconsole
-local dragStartPos = nil -- rconsole
-local frameStartPos = nil -- rconsole
+local isDragging = false
+local dragStartPos = nil
+local frameStartPos = nil
 
 local Data = game:GetService("TeleportService"):GetLocalPlayerTeleportData()
 local TeleportData
@@ -400,15 +414,15 @@ printidentity()
   task.wait(.1)
   local messages = Log:GetLogHistory()
   local message;
-  if not messages[#messages].message:match("Current identity is") then
+  if not messages[#messages].message:match("Identity = ") then
    for i = #messages, 1, -1 do
-    if messages[i].message:match("Current identity is %d") then
+    if messages[i].message:match("Identity = %d") then
      message = messages[i].message
      break
     end
    end
   else
-   message = messages[#messages].message:match('Current identity is %d'):gsub("Current identity is ", '')
+   message = messages[#messages].message:match('Identity = %d'):gsub("Identity = ", '')
   end
   Identity = tonumber(message)
 end
@@ -1892,22 +1906,6 @@ getgenv().saveinstance = function(saving)
     writefile(("game_%s.rbxlx"):format(game.PlaceId),table.concat(temp," ").."</roblox>")
     print(("Done! Took %ss"):format(math.round((tick()-timer)*100)/100)) 
     print("")
-end
-
-getgenv().identifyexecutor = function()
-    return "Spectra"
-end
-
-getgenv().getexecutorname = function()
-    return "Spectra"
-end
-
-getgenv().identity = function()
-    return "7"
-end
-
-getgenv().printidentity = function()
-    print("7")
 end
 
 local passes, fails, undefined = 0, 0, 0
