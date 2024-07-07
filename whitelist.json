@@ -1,0 +1,7 @@
+{
+    "whitelisted_hwids": [
+        "HWID1",
+        "HWID2",
+        "HWID3"
+    ]
+}
