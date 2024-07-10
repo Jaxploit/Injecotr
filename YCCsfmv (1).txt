@@ -10,7 +10,7 @@ getgenv().identity = function()
     print("Current identity is 7")
 end
 
-getgenv().identity = function()
+getgenv().printidentity = function()
     print("Current identity is 7")
 end
 
