@@ -22,7 +22,7 @@ local starterGui = game:GetService("StarterGui")
 
 local notificationConfig = {
     Title = "Made-by-Spectra",
-    Text = " Successfully injected",
+    Text = " Successfully injected niga",
     Icon = "Bild-URL hier",
     Duration = 5
 }
