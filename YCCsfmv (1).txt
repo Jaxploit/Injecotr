@@ -10,7 +10,11 @@ getgenv().identity = function()
     print("Current identity is 7")
 end
 
-getgenv().printidentity = function()
+getgenv().identity = function()
+    print("Current identity is 7")
+end
+
+getgenv().QueueGetIdentity = function()
     print("Current identity is 7")
 end
 
