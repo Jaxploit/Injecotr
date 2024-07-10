@@ -84,6 +84,53 @@ getmetatable = getmetatable
 type = type
 version = version
 
+function getplayers()
+  local players = {}
+  for _, x in pairs(game:GetService("Players"):GetPlayers()) do
+    players[x.Name] = x
+  end
+  return players
+end
+
+function getplayer(name: string)
+  return not name and getplayers()["LocalPlayer"] or getplayers()[name]
+end
+
+function getfps(suffix: boolean)
+    local rawfps = game:GetService("Stats").Workspace.Heartbeat:GetValue()
+    local fpsnum = tonumber(rawfps)
+    local fps = tostring(math.round(fpsnum))
+    return not suffix and fps or fps.." fps"
+end
+
+function getping(suffix: boolean)
+    local rawping = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
+    local pingstr = rawping:sub(1,#rawping-7)
+    local pingnum = tonumber(pingstr)
+    local ping = tostring(math.round(pingnum))
+    return not suffix and ping or ping.." ms"
+end
+
+function runanimation(animationId, player)
+    local plr = player or getplayer()
+    local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        local animation = Instance.new("Animation")
+        animation.AnimationId = "rbxassetid://" .. tostring(animationId)
+        humanoid:LoadAnimation(animation):Play()
+    end
+end
+
+function customprint(text: string, properties: table, imageId: rbxasset)
+    print(text)
+    task.wait(.025)
+    local msg = game:GetService("CoreGui").DevConsoleMaster.DevConsoleWindow.DevConsoleUI:WaitForChild("MainView").ClientLog[tostring(#game:GetService("CoreGui").DevConsoleMaster.DevConsoleWindow.DevConsoleUI.MainView.ClientLog:GetChildren())-1].msg
+    for i, x in pairs(properties) do
+        msg[i] = x
+    end
+    if imageId then msg.Parent.image.Image = imageId end
+end
+
 -- Services / Instances
 local HttpService = game:GetService('HttpService');
 local Log = game:GetService('LogService');
