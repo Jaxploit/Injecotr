@@ -1,109 +1,138 @@
--- // GUI TO LUA \\ --
+-- Gui to Lua
+-- Version: 3.2
 
--- // INSTANCES: 11 | SCRIPTS: 4 | MODULES: 0 \\ --
+-- Instances:
 
-local UI = {}
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local FakeSHub = Instance.new("Frame")
+local ExecButton = Instance.new("TextButton")
+local ClearButton = Instance.new("TextButton")
+local Editor = Instance.new("TextBox")
 
--- // StarterGui.ScreenGui \\ --
-UI["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
-UI["1"]["ResetOnSpawn"] = false
+--Properties:
 
--- // StarterGui.ScreenGui.Frame \\ --
-UI["2"] = Instance.new("Frame", UI["1"])
-UI["2"]["Active"] = true
-UI["2"]["BorderSizePixel"] = 0
-UI["2"]["BackgroundColor3"] = Color3.fromRGB(13, 13, 13)
-UI["2"]["Selectable"] = true
-UI["2"]["Size"] = UDim2.new(0, 724, 0, 332) 
-UI["2"]["Position"] = UDim2.new(0.21893, 0, 0.21092, 0)
-UI["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+ScreenGui.Parent = game.Workspace
+ScreenGui.ResetOnSpawn = false
 
--- // StarterGui.ScreenGui.Frame.LocalScript \\ --
-UI["3"] = Instance.new("LocalScript", UI["2"])
+Frame.Parent = ScreenGui
+Frame.Active = true
+Frame.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.218934909, 0, 0.210918114, 0)
+Frame.Selectable = true
+Frame.Size = UDim2.new(0, 724, 0, 332)
 
+Title.Name = "Title"
+Title.Parent = Frame
+Title.BackgroundColor3 = Color3.fromRGB(21, 21, 21)
+Title.BorderColor3 = Color3.fromRGB(171, 0, 0)
+Title.Size = UDim2.new(0, 724, 0, 30)
+Title.Font = Enum.Font.Arial
+Title.Text = "  Spectra X - V1.7 | BETA UI"
+Title.TextColor3 = Color3.fromRGB(171, 0, 0)
+Title.TextSize = 14.000
+Title.TextXAlignment = Enum.TextXAlignment.Left
 
--- // StarterGui.ScreenGui.Frame.ExecButton \\ --
-UI["4"] = Instance.new("TextButton", UI["2"])
-UI["4"]["BorderSizePixel"] = 0
-UI["4"]["TextSize"] = 14
-UI["4"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
-UI["4"]["BackgroundColor3"] = Color3.fromRGB(37, 37, 37)
-UI["4"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-UI["4"]["BorderMode"] = Enum.BorderMode.Inset
-UI["4"]["AutomaticSize"] = Enum.AutomaticSize.X
-UI["4"]["Size"] = UDim2.new(0, 131, 0, 35)
-UI["4"]["Name"] = [[ExecButton]]
-UI["4"]["BorderColor3"] = Color3.fromRGB(172, 0, 0)
-UI["4"]["Text"] = [[Execute]]
-UI["4"]["Style"] = Enum.ButtonStyle.RobloxButtonDefault
-UI["4"]["Position"] = UDim2.new(0.00829, 0, 0.87048, 0)
+FakeSHub.Name = "FakeSHub"
+FakeSHub.Parent = Frame
+FakeSHub.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+FakeSHub.BorderColor3 = Color3.fromRGB(27, 27, 27)
+FakeSHub.Position = UDim2.new(0.856353581, 0, 0.108433738, 0)
+FakeSHub.Size = UDim2.new(0, 96, 0, 246)
 
--- // StarterGui.ScreenGui.Frame.ExecButton.LocalScript \\ --
-UI["5"] = Instance.new("LocalScript", UI["4"])
+ExecButton.Name = "ExecButton"
+ExecButton.Parent = Frame
+ExecButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+ExecButton.BorderColor3 = Color3.fromRGB(171, 0, 0)
+ExecButton.BorderSizePixel = 0
+ExecButton.Position = UDim2.new(0.00828729291, 0, 0.870481908, 0)
+ExecButton.Size = UDim2.new(0, 131, 0, 35)
+ExecButton.Style = Enum.ButtonStyle.RobloxButtonDefault
+ExecButton.Font = Enum.Font.SourceSans
+ExecButton.Text = "Execute"
+ExecButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExecButton.TextSize = 14.000
 
+ClearButton.Name = "ClearButton"
+ClearButton.Parent = Frame
+ClearButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+ClearButton.BorderColor3 = Color3.fromRGB(171, 0, 0)
+ClearButton.BorderSizePixel = 0
+ClearButton.Position = UDim2.new(0.204419896, 0, 0.870481908, 0)
+ClearButton.Size = UDim2.new(0, 131, 0, 35)
+ClearButton.Style = Enum.ButtonStyle.RobloxButtonDefault
+ClearButton.Font = Enum.Font.SourceSans
+ClearButton.Text = "Clear"
+ClearButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ClearButton.TextSize = 14.000
 
--- // StarterGui.ScreenGui.Frame.FakeSHub \\ --
-UI["6"] = Instance.new("Frame", UI["2"])
-UI["6"]["BackgroundColor3"] = Color3.fromRGB(16, 16, 16)
-UI["6"]["Size"] = UDim2.new(0, 96, 0, 246)
-UI["6"]["Position"] = UDim2.new(0.85635, 0, 0.10843, 0)
-UI["6"]["BorderColor3"] = Color3.fromRGB(28, 28, 28)
-UI["6"]["Name"] = [[FakeSHub]]
+Editor.Name = "Editor"
+Editor.Parent = Frame
+Editor.BackgroundColor3 = Color3.fromRGB(19, 19, 19)
+Editor.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Editor.BorderSizePixel = 0
+Editor.Position = UDim2.new(0.00716868043, 0, 0.107704528, 0)
+Editor.Size = UDim2.new(0, 605, 0, 246)
+Editor.Font = Enum.Font.SourceSans
+Editor.Text = ""
+Editor.TextColor3 = Color3.fromRGB(255, 255, 255)
+Editor.TextSize = 14.000
+Editor.TextXAlignment = Enum.TextXAlignment.Left
+Editor.TextYAlignment = Enum.TextYAlignment.Top
 
--- // StarterGui.ScreenGui.Frame.Editor \\ --
-UI["7"] = Instance.new("TextBox", UI["2"])
-UI["7"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
-UI["7"]["BorderSizePixel"] = 0
-UI["7"]["TextXAlignment"] = Enum.TextXAlignment.Left
-UI["7"]["TextSize"] = 14
-UI["7"]["Name"] = [[Editor]]
-UI["7"]["TextYAlignment"] = Enum.TextYAlignment.Top
-UI["7"]["BackgroundColor3"] = Color3.fromRGB(20, 20, 20)
-UI["7"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-UI["7"]["Size"] = UDim2.new(0, 605, 0, 246)
-UI["7"]["Position"] = UDim2.new(0.00717, 0, 0.1077, 0)
-UI["7"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["7"]["Text"] = [[]]
+-- Scripts:
 
--- // StarterGui.ScreenGui.Frame.Editor.LocalScript \\ --
-UI["8"] = Instance.new("LocalScript", UI["7"])
+local function UZRJMT_fake_script() -- ExecButton.LocalScript 
+	local script = Instance.new('LocalScript', ExecButton)
 
+	script.Parent.MouseButton1Click:Connect(function()
+		local code = script.Parent.Parent.Editor.Text
+		local success, errorMessage = pcall(function()
+			loadstring(code)()
+		end)
+		if not success then
+			warn("Error executing script: " .. errorMessage)
+		end
+	end)
+	
+end
+coroutine.wrap(UZRJMT_fake_script)()
+local function KFARZ_fake_script() -- ClearButton.LocalScript 
+	local script = Instance.new('LocalScript', ClearButton)
 
--- // StarterGui.ScreenGui.Frame.ClearButton \\ --
-UI["9"] = Instance.new("TextButton", UI["2"])
-UI["9"]["BorderSizePixel"] = 0
-UI["9"]["TextSize"] = 14
-UI["9"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
-UI["9"]["BackgroundColor3"] = Color3.fromRGB(37, 37, 37)
-UI["9"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-UI["9"]["BorderMode"] = Enum.BorderMode.Inset
-UI["9"]["AutomaticSize"] = Enum.AutomaticSize.X
-UI["9"]["Size"] = UDim2.new(0, 131, 0, 35)
-UI["9"]["Name"] = [[ClearButton]]
-UI["9"]["BorderColor3"] = Color3.fromRGB(172, 0, 0)
-UI["9"]["Text"] = [[Clear]]
-UI["9"]["Style"] = Enum.ButtonStyle.RobloxButtonDefault
-UI["9"]["Position"] = UDim2.new(0.20442, 0, 0.87048, 0)
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Parent.Editor.Text = ""
+	end)
+	
+end
+coroutine.wrap(KFARZ_fake_script)()
+local function ZEYOOE_fake_script() -- Editor.LocalScript 
+	local script = Instance.new('LocalScript', Editor)
 
--- // StarterGui.ScreenGui.Frame.ClearButton.LocalScript \\ --
-UI["a"] = Instance.new("LocalScript", UI["9"])
+	local lastKnownText = ""
+	
+	local function restoreLastText()
+		script.Parent.Text = lastKnownText
+		script.Parent.CursorPosition = #script.Parent.Text + 1
+	end
+	
+	script.Parent.FocusLost:Connect(function()
+		lastKnownText = script.Parent.Text
+	end)
+	
+	script.Parent.Focused:Connect(function()
+		if lastKnownText ~= "" then
+			restoreLastText()
+		end
+	end)
+end
+coroutine.wrap(ZEYOOE_fake_script)()
+local function LLJNN_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
 
-
--- // StarterGui.ScreenGui.Frame.Title \\ --
-UI["b"] = Instance.new("TextLabel", UI["2"])
-UI["b"]["TextXAlignment"] = Enum.TextXAlignment.Left
-UI["b"]["BackgroundColor3"] = Color3.fromRGB(22, 22, 22)
-UI["b"]["TextSize"] = 14
-UI["b"]["FontFace"] = Font.new([[rbxasset://fonts/families/Arial.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-UI["b"]["TextColor3"] = Color3.fromRGB(172, 0, 0)
-UI["b"]["Size"] = UDim2.new(0, 724, 0, 30)
-UI["b"]["BorderColor3"] = Color3.fromRGB(172, 0, 0)
-UI["b"]["Text"] = [[  Spectra X - V1.7 | BETA UI]]
-UI["b"]["Name"] = [[Title]]
-
--- // StarterGui.ScreenGui.Frame.LocalScript \\ --
-local function SCRIPT_3()
-local script = UI["3"]
 	local UserInputService = game:GetService("UserInputService")
 	local dragging, dragInput, dragStart, startPos
 	local frame = script.Parent
@@ -139,51 +168,4 @@ local script = UI["3"]
 		end
 	end)
 end
-task.spawn(SCRIPT_3)
--- // StarterGui.ScreenGui.Frame.ExecButton.LocalScript \\ --
-local function SCRIPT_5()
-local script = UI["5"]
-	script.Parent.MouseButton1Click:Connect(function()
-		local code = script.Parent.Parent.Editor.Text
-		local success, errorMessage = pcall(function()
-			loadstring(code)()
-		end)
-		if not success then
-			warn("Error executing script: " .. errorMessage)
-		end
-	end)
-	
-end
-task.spawn(SCRIPT_5)
--- // StarterGui.ScreenGui.Frame.Editor.LocalScript \\ --
-local function SCRIPT_8()
-local script = UI["8"]
-	local lastKnownText = ""
-	
-	local function restoreLastText()
-		script.Parent.Text = lastKnownText
-		script.Parent.CursorPosition = #script.Parent.Text + 1
-	end
-	
-	script.Parent.FocusLost:Connect(function()
-		lastKnownText = script.Parent.Text
-	end)
-	
-	script.Parent.Focused:Connect(function()
-		if lastKnownText ~= "" then
-			restoreLastText()
-		end
-	end)
-end
-task.spawn(SCRIPT_8)
--- // StarterGui.ScreenGui.Frame.ClearButton.LocalScript \\ --
-local function SCRIPT_a()
-local script = UI["a"]
-	script.Parent.MouseButton1Click:Connect(function()
-		script.Parent.Parent.Editor.Text = ""
-	end)
-	
-end
-task.spawn(SCRIPT_a)
-
-return UI["1"], require;
+coroutine.wrap(LLJNN_fake_script)()
